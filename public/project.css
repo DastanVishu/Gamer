@@ -5,6 +5,7 @@
         background-position: center; 
         transition: background 1.5s linear;
         -webkit-backface-visibility: hidden;
+             background-color: #2E2E2E;
         webkit-transition: background-image 1.5s linear;
         -webkit-transform:translate3d(0,0,0);
             width: 100%;
