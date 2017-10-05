@@ -59,6 +59,6 @@ app.use(likeRoutes);
 
 
 // app request listener
-app.listen(3000, function(req, res){
+app.listen(process.env.PORT, process.env.IP, function(req, res){
 	console.log("Sever is started...!!");
 });
