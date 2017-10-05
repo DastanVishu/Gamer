@@ -1,0 +1,107 @@
+<% include ../partials/header %>
+
+<div class="container" id="free-style">
+
+<!-- ==============================================data uploading section============================================= -->
+
+  <div class="card text-center" id="sizeing">
+    <div class="card-body">
+     <h4 class="card-title">Compose post</h4>
+     <form class="form-inline" action="/home" method="post">
+        <textarea name="status"></textarea><h1>/</h1>
+        <a href="/home/image" class="links paddings"><i class="fa fa-picture-o fa-3x" aria-hidden="true"></i></a>
+        <h1>/</h1>
+        <a href="/home/videos" class="links paddings"><i class="fa fa-video-camera fa-3x" aria-hidden="true"></i></a>
+       <button type="submit" class="btn btn-outline-dark btn-lg">Submit</button>
+     </form>
+    </div>
+  </div>
+
+<!-- ==========================================data uploading section finished============================================ -->
+              
+                <% Posts.forEach(function(data){ %>
+ <!-- =============================================data container================================================= -->
+  
+  <!-- ================================================data 1======================================================== -->
+  <div class="container free-size">
+    <div class="card">
+      <% if(data.image == null & data.video == null){ %>
+        <div class="card-body">
+          <h4 class="card-title"><%= data.author.username %></h4>
+          <p class="card-text"><%= data.status %></p>
+        </div>
+      <% } else if( data.video == null) { %>
+        <img class="card-img-top" src="<%= data.image %>" alt="Card image cap">
+      <% } else if( data.image == null) { %>
+        <iframe src="https://www.youtube.com/embed/Qcjgfh-1ydQ" frameborder="0" allowfullscreen></iframe>
+      <% } %>
+
+      <div class="card-body">
+        <!-- ======================= comments & likes ================== -->
+          <div class="form-inline">
+            <!-- ====================like==================== -->
+              <% var b = 0 %>
+                <% data.likes.forEach(function(like){ %>
+                  <% b+=1 %>
+                <% }) %>
+                <% var toggle %>
+                <% likes.forEach(function(find){ %>
+                  <% data.likes.forEach(function(fLike){ %>
+                    <% if(data._id.equals(find.postid) && currentUser._id.equals(find.author.id) && fLike.equals(find.id)) { %>
+                      <% toggle = 1 %>
+                    <% } %> 
+                  <% }) %>
+                <% }) %>
+
+              <% if(toggle == 1) { %>
+                <p class="paddings"><a class="links" href="/likes/<%= data._id %>/liker"><%= b %> </a><a class= "links" href="/likes/disliker/<%= data._id %>"><i class="fa fa-thumbs-up" aria-hidden="true">-likes</i></a><p>
+              <% } else { %>
+                <p class="paddings"><a class="links" href="/likes/<%= data._id %>/liker"><%= b %> </a><a class= "links" href="/likes/<%= data._id %>"><i class="fa fa-thumbs-o-up" aria-hidden="true">-likes</i></a><p>
+              <% } %> 
+            <!-- ============================================ -->
+
+            <!-- ====================comments================ -->
+              <% var a = 0 %>
+              <% data.comments.forEach(function(comment){ %>
+                <% a+=1 %> 
+              <% }) %>
+            <p class="paddings"><a class="links" href="/comments/<%= data._id %>"><%= a %> <i class="fa fa-comment-o" aria-hidden="true"></i>-Comments</a></p>
+            <!-- ============================================ -->
+          </div>
+        <!-- =========================================================== -->
+
+        <!-- =======================show user name======================= -->
+          <% if(data.image != null || data.video != null){ %>
+            <h4 class="card-title"><%= data.author.username %></h4>
+          <% } %>
+        <!-- =================================================== -->
+
+
+        <!-- ===================== discription======================== -->
+          <% if(data.image != null || data.video != null){ %>
+            <p class="card-text"><%= data.status %></p>
+          <% } %>
+        <!-- ===================discription ending========================== -->
+
+        <!-- =========================== deleted and edit=========================== -->
+        <div class="text-right">
+          <% if(currentUser && data.author.id.equals(currentUser._id)){ %>            
+            <form action="/comments/<%= data._id %>?_method=DELETE" method="POST">
+              <a class="btn btn-outline-secondary btn-sm" href="/comments/<%= data._id %>/edit">Edit</a>
+              <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- ========================================================== -->
+<!-- ======================================================data1 end======================================================= -->
+          
+          <% }) %>
+            
+            
+            
+
+</div>
+<% include ../partials/footer %>

@@ -1,0 +1,74 @@
+<% include ../partials/header %>
+
+<% if(data.image == null & data.video == null){ %>
+<!--  ===============================for status=================================== -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="content">
+          <h1>Edit Status</h1>
+          <form action="/comments/<%=data._id %>/edit?_method=PUT" method="POST">
+            <div class="form-group">
+              <lable for= "vv">Stutas</lable>
+              <textarea id="cancel" id="vv"class="form-control clr" name= "userpost[status]"><%= data.status %></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-outline-dark">Edit</button>
+            </div>  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ============================================================================== -->
+
+<% } else if( data.video == null) { %>
+<!--  ===============================for image=================================== -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="content">
+          <h1>Edit Image Link</h1>
+          <form  action="/comments/<%=data._id %>/edit?_method=PUT" method="POST">
+            <div class="form-group">
+              <lable for= "v">Image address</lable>
+              <input type="text" name= "userpost[image]" value="<%= data.image %>" id="v" class="form-control clr">
+              <lable for= "vv">Description</lable>
+              <textarea id="cancel" name= "userpost[status]" id="vv" class="form-control clr"><%= data.status %></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-outline-dark">Edit</button>
+            </div>  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ============================================================================== -->
+
+<% } else if( data.image == null) { %>
+<!--  ===============================for videos=================================== -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="content">
+          <h1>Edit Video Link</h1>
+          <form  action="/comments/<%=data._id %>/edit?_method=PUT" method="POST">
+            <div class="form-group">
+              <lable for= "v">Video Link</lable>
+              <input type="text" name= "userpost[video]" value="<%= data.video %>" id="v" class="form-control clr">
+              <lable for= "vv">Description</lable>
+              <textarea id="cancel" name= "userpost[status]" id="vv" class="form-control clr"><%= data.status %></textarea>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-block btn-outline-dark">Edit</button>
+            </div>  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- ============================================================================== -->        
+<% } %>
+
+<% include ../partials/footer %>

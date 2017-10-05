@@ -1,0 +1,119 @@
+<% include ../partials/header %>
+
+
+<div class="container" id="free-style">
+<div class="card" id="sizeing">
+
+<!-- ===================================================videos, image, status====================================================== -->
+
+      <div class="card">
+        <% if(data.image == null && data.video == null){ %>
+          <br>
+          <p class="text-center"><%= data.status %></p>
+        <% } else if( data.video == null) { %>
+          <img class="card-img-top" src="<%= data.image %>" alt="Card image cap" style="max-height: 100%;">
+        <% } else if( data.image == null) { %>
+         <iframe src="<%= data.video %>" frameborder="0" allowfullscreen style="height: 30em;"></iframe>
+        <% } %>
+        <!-- ================================================================ -->
+ <!-- ====================likes & comments count===================== -->
+        <% var a = 0 %>
+        <% var b = 0 %>
+        <% data.comments.forEach(function(comment){ %>
+          <% a+=1 %>
+        <% }) %>
+        <% data.likes.forEach(function(comment){ %>
+          <% b+=1 %>
+        <% }) %>
+          <div class="card-body">
+            <div class="form-inline"> 
+                <% var toggle %>
+                <% likes.forEach(function(find){ %>
+                    <% data.likes.forEach(function(fLike){ %>
+                        <% if(data._id.equals(find.postid) && currentUser._id.equals(find.author.id) && fLike.equals(find.id)) { %>
+                            <% toggle = 1 %>
+                        <% } %> 
+                    <% }) %>
+                <% }) %>
+                <% if(toggle == 1) { %>
+                    <p class="paddings">
+                        <a class="links" href="/likes/<%= data._id %>/liker"> <%= b %> </a>
+                        <a class="links" href="/likes/disliker/<%= data._id %>"><i class="fa fa-thumbs-up" aria-hidden="true">-likes</i></a>
+                    </p>
+                <% } else { %>
+                    <p class="paddings">
+                        <a class="links" href="/likes/<%= data._id %>/liker"> <%= b %> </a>
+                        <a class="links" href="/likes/<%= data._id %>"><i class="fa fa-thumbs-o-up" aria-hidden="true">-likes</i></a>
+                    </p>
+                <% } %>
+              <p class="paddings">
+                <a class="links"> <%= a %> <i class="fa fa-comment-o" aria-hidden="true"></i>-Comments</a>
+                </p>
+              </div>
+          <!-- ================================================================= -->
+              
+              
+<!-- ===============================author, post discription=================================== -->
+            <h4 class="card-title">Submitted by <%= data.author.username %></h4>
+            <% if(data.image != null || data.video != null){ %>
+              <p class="card-text"><%= data.status %></p>
+            <% } %>
+                  <div class="text-right">
+                    <% if(currentUser && data.author.id.equals(currentUser._id)){ %>
+                       
+                        <form action="/comments/<%= data._id %>?_method=DELETE" method="POST">
+                             <a class="btn btn-outline-secondary btn-sm" href="/comments/<%= data._id %>/edit">Edit</a>
+                          <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                            
+                    <% } %>
+                </div>
+          </div>
+      </div>
+      <!-- ============================================================== -->
+      
+<!-- ===============================================Add comments============================================= -->
+
+              <div class="card-body">
+                  <form action="/comments/<%= data._id %>" method="POST">
+                    <div class="form-group">
+                      <lable for= "vv">Add Comment</lable>
+                        <div class="row">
+                          <div class="col-12 col-md-8">
+                            <textarea id="cancel" style=" width: 100%; " name="text"></textarea>
+                          </div>
+                          <div class="col-6 col-md-4">
+                            <button type="submit" class="btn btn-secondary btn-sm">Post Comment</button>
+                          </div>
+                        </div>
+                    </div>  
+                  </form>
+              </div>
+        
+      <!-- ========================================================================================================= -->
+ 
+      <!-- ================================================comments list================================================= -->
+      <% data.comments.forEach(function(comment){ %>  
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h6 class="card-subtitle mb-2 text-muted"><%= comment.author.username %></h6>
+                <p class="card-text"><%= comment.text %></p>
+                
+                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                    <div class="text-right">
+                        <form  action="/comments/<%= data._id%>/comment/<%= comment._id%>?_method=DELETE" method="post">
+                            <a class="btn btn-outline-secondary btn-sm" href="/comments/<%= data._id%>/comment/<%= comment._id%>/edit">Edit</a>   
+                            <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+                        </form>
+                    </div>
+                <% } %>       
+            </li>
+          </ul>
+        </div>
+      <% }) %>
+      <!-- ========================================================================================================= -->
+</div>
+</div>
+<% include ../partials/footer %>
+

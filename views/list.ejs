@@ -1,0 +1,14 @@
+<% include ./partials/header %>
+
+
+<div class="container" id="free-style">
+  <div class="card text-center" id="sizeing">
+    <ul class="list-group">
+      <% lists.forEach(function(uname){ %>
+        <li class="list-group-item"><%= uname.author.username %></li>
+       <% }) %>
+    </ul>
+  </div>
+</div>
+
+<% include ./partials/footer %>
