@@ -33,7 +33,7 @@
       <% } else if( data.video == null) { %>
         <img class="card-img-top" src="<%= data.image %>" alt="Card image cap">
       <% } else if( data.image == null) { %>
-        <iframe src="https://www.youtube.com/embed/Qcjgfh-1ydQ" frameborder="0" allowfullscreen></iframe>
+        <iframe src="<%= data.video %>" frameborder="0" allowfullscreen></iframe>
       <% } %>
 
       <div class="card-body">
