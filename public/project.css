@@ -114,6 +114,9 @@
     #hi{
         width: 100%;
     }
+#sizeing{
+    margin-bottom: 1em;
+}
 
     
 @media (min-width: 768px) {  
