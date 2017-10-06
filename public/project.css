@@ -64,9 +64,8 @@
     }
 
     .free-size{
-
-        padding: 1em;
-            position: inherit;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     img{
@@ -74,7 +73,8 @@
     }
 
     iframe{
-        height: 19em;
+        width: 100%;
+        height: 18em;
     }
 
     .card{
@@ -114,3 +114,21 @@
     #hi{
         width: 100%;
     }
+
+    
+@media (min-width: 768px) {  
+  .card-columns {column-count: 2;}
+}
+
+@media (min-width: 992px) { 
+ .card-columns {column-count: 2;}
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+   .card-columns {column-count: 2;} 
+}
+
+@media (min-width: 576px) {  
+   .card-columns {column-count: 2;} 
+}
