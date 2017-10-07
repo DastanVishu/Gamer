@@ -28,7 +28,7 @@
       <% if(data.image == null & data.video == null){ %>
         <div class="card-body">
           <h4 class="card-title"><%= data.author.username %></h4>
-          <p class="card-text"><%= data.status %></p>
+          <p class="card-text"><%= data.status.substring(0, 150) %>....</p>
         </div>
       <% } else if( data.video == null) { %>
         <img class="card-img-top" src="<%= data.image %>" alt="Card image cap">
@@ -79,7 +79,7 @@
 
         <!-- ===================== discription======================== -->
           <% if(data.image != null || data.video != null){ %>
-            <p class="card-text"><%= data.status %></p>
+            <p class="card-text"><%= data.status.substring(150, 0) %>....</p>
           <% } %>
         <!-- ===================discription ending========================== -->
 
