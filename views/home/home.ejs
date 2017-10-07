@@ -31,9 +31,13 @@
           <p class="card-text"><%= data.status.substring(0, 150) %>....</p>
         </div>
       <% } else if( data.video == null) { %>
-        <img class="card-img-top" src="<%= data.image %>" alt="Card image cap">
+        <a class="links" href="/comments/<%= data._id %>">
+            <img class="card-img-top" src="<%= data.image %>" alt="Card image cap">
+        </a>
       <% } else if( data.image == null) { %>
-        <iframe src="<%= data.video %>" frameborder="0" allowfullscreen></iframe>
+        <a class="links" href="/comments/<%= data._id %>">
+            <iframe src="<%= data.video %>" frameborder="0" allowfullscreen></iframe>
+        </a>
       <% } %>
 
       <div class="card-body">
