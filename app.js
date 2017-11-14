@@ -24,13 +24,15 @@ var homeRoutes 		= require("./routes/home"),
     likeRoutes     = require("./routes/likes");
 
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://dastan:intel@ds111565.mlab.com:11565/gamer");
+//mongoose.connect("mongodb://dastan:intel@ds111565.mlab.com:11565/gamer");
+mongoose.connect("mongodb://localhost/Gamer_V2");
 
 
 app.use(express.static( __dirname + "/public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(flash());
 app.use(cookieParser('secret'));
 
 app.use(require("express-session")({
@@ -47,8 +49,10 @@ passport.deserializeUser(UserModel.deserializeUser());
 
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
-})
+});
 
 
 // used routes
@@ -59,6 +63,6 @@ app.use(likeRoutes);
 
 
 // app request listener
-app.listen(process.env.PORT, process.env.IP, function(req, res){
+app.listen(3000, function(req, res){
 	console.log("Sever is started...!!");
 });

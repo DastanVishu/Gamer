@@ -18,6 +18,7 @@ router.post("/", passport.authenticate("local", {
 
 router.get("/logout", function(req, res){
     req.logout();
+    req.flash("success", "Logged you out!");
     res.redirect("/");
 })
 
@@ -29,6 +30,7 @@ router.get("/register", function(req, res){
 router.post("/register", function(req, res){
 	UserModel.register(new UserModel({username: req.body.username }), req.body.password, function(err, user){
 		if(err){
+            req.flash("error", err.message);
 			return res.render("signup");
 		} else {
 			passport.authenticate("local")(req, res, function(){
@@ -49,7 +51,7 @@ router.post("/register", function(req, res){
                         }
                     });
                 });
-
+                req.flash("success", "Welcome to Game_Post_Page " + user.username);
 				res.redirect("/home");
 			});
 		}

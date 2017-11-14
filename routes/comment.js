@@ -37,10 +37,12 @@ router.post("/comments/:id", middleware.isLoggedIn, function(req, res){
            var value = { text: text, author: author };
             CommentModel.create(value, function(err, comment){
                if(err){
+                   req.flash("error", "Something went wrong"); 
                    console.log(err);
                } else {
                    postmodel.comments.push(comment);
                    postmodel.save();
+                   req.flash("success", "Successfully added comment");
                    res.redirect("/comments/" + postmodel._id);
                }
             });
@@ -110,6 +112,7 @@ router.delete("/comments/:id/comment/:comment_id", middleware.checkCommentOwners
                     console.log(err);
                     res.redirect("/comments/" + req.params.id);
                 }
+                res.flash("success", "Comment deleted");
                 res.redirect("/comments/" + req.params.id);
             });
         }
