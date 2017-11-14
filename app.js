@@ -20,8 +20,9 @@ var UserModel           = require("./models/user"),
 // requring routes 
 var homeRoutes 		= require("./routes/home"),
 	loginRoutes		= require("./routes/login"),
-    commentRoutes  = require("./routes/comment"),
-    likeRoutes     = require("./routes/likes");
+    commentRoutes  	= require("./routes/comment"),
+	likeRoutes     	= require("./routes/likes"),
+	profileRoutes	= require("./routes/profile");
 
 mongoose.Promise = global.Promise;
 //mongoose.connect("mongodb://dastan:intel@ds111565.mlab.com:11565/gamer");
@@ -60,6 +61,7 @@ app.use(loginRoutes);
 app.use(commentRoutes);
 app.use(homeRoutes);
 app.use(likeRoutes);
+app.use(profileRoutes);
 
 
 // app request listener
