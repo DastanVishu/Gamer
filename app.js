@@ -25,8 +25,8 @@ var homeRoutes 		= require("./routes/home"),
 	profileRoutes	= require("./routes/profile");
 
 mongoose.Promise = global.Promise;
-//mongoose.connect("mongodb://dastan:intel@ds111565.mlab.com:11565/gamer");
-mongoose.connect("mongodb://localhost/Gamer_V2");
+mongoose.connect("mongodb://dastan:intel@ds111565.mlab.com:11565/gamer");
+//mongoose.connect("mongodb://localhost/Gamer_V2");
 
 
 app.use(express.static( __dirname + "/public"));
